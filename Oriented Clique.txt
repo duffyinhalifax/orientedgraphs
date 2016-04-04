@@ -1,0 +1,28 @@
+def orient(G):
+    J = DiGraph()
+    for e in G.edges():
+        if (random() > 0.5):
+            J.add_edge(e[0],e[1])
+        else:
+            J.add_edge(e[1],e[0])
+    return J
+
+
+def isOrientedClique(G):
+    for v in G.vertices():
+        sees = [v]
+        ins = G.neighbors_in(v)
+        outs = G.neighbors_out(v)
+        for u in ins:
+            sees.append(u)
+            for x in G.neighbors_in(u):
+                sees.append(x)
+        for z in outs:
+            sees.append(z)
+            for y in G.neighbors_out(z):
+                sees.append(y)
+        hood = Set(sees)
+        verts = Set(G.vertices())
+        if hood != verts:
+            return false
+    return true
